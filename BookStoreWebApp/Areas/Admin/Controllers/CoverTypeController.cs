@@ -7,20 +7,20 @@ using System.ComponentModel;
 
 namespace BookStoreWebApp.Areas.Admin.Controllers
 {
-    public class CategoriesController : Controller
+    public class CoverTypeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public CategoriesController(IUnitOfWork unitOfWork)
+        public CoverTypeController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
         // GET: CategoriesController
         public IActionResult Index()
         {
-            IEnumerable<Categories> objCategoriesList = _unitOfWork.Category.GetAll();
+            IEnumerable<CoverType> coverTypeList = _unitOfWork.CoverType.GetAll();
 
-            return View(objCategoriesList);
+            return View(coverTypeList);
         }
 
         // GET: CategoriesController/Create
@@ -32,13 +32,13 @@ namespace BookStoreWebApp.Areas.Admin.Controllers
         // POST: CategoriesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Categories obj)
+        public IActionResult Create(CoverType obj)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Category.Add(obj);
+                _unitOfWork.CoverType.Add(obj);
                 _unitOfWork.Save();
-                TempData["success"] = "Category Created Successfuly";
+                TempData["success"] = "Cover Type Created Successfuly";
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -52,7 +52,7 @@ namespace BookStoreWebApp.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var obj = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
+            var obj = _unitOfWork.CoverType.GetFirstOrDefault(u => u.Id == id);
 
             if (obj == null)
             {
@@ -65,13 +65,13 @@ namespace BookStoreWebApp.Areas.Admin.Controllers
         // POST: CategoriesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Categories obj)
+        public IActionResult Edit(CoverType obj)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Category.Update(obj);
+                _unitOfWork.CoverType.Update(obj);
                 _unitOfWork.Save();
-                TempData["success"] = "Category Edited Successfuly";
+                TempData["success"] = "Cover Type Edited Successfuly";
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -85,7 +85,7 @@ namespace BookStoreWebApp.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var obj = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
+            var obj = _unitOfWork.CoverType.GetFirstOrDefault(u => u.Id == id);
 
             if (obj == null)
             {
@@ -105,16 +105,16 @@ namespace BookStoreWebApp.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var obj = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
+            var obj = _unitOfWork.CoverType.GetFirstOrDefault(u => u.Id == id);
 
             if (obj == null)
             {
                 return NotFound();
             }
 
-            _unitOfWork.Category.Delete(obj);
+            _unitOfWork.CoverType.Delete(obj);
             _unitOfWork.Save();
-            TempData["success"] = "Category Deleted Successfuly";
+            TempData["success"] = "Cover Type Deleted Successfuly";
             return RedirectToAction("Index");
         }
     }

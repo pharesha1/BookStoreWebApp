@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookStoreWebApp.DataAccess.Repository
 {
-    public class CategoryRepository : Repository<Categories>, ICategoryRepository
+    public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
         private readonly AppDbContext _database;
 
@@ -18,9 +18,9 @@ namespace BookStoreWebApp.DataAccess.Repository
             _database = database;
         }
 
-        void ICategoryRepository.Update(Categories category)
+        void ICategoryRepository.Update(Category category)
         {
-            _database.Categories.Update(category);
+            _database.Category.Update(category);
         }
     }
 }

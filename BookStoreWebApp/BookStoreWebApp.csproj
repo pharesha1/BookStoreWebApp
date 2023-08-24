@@ -22,4 +22,8 @@
     <ProjectReference Include="..\BookStoreWebApp.DataAccess\BookStoreWebApp.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Category\" />
+  </ItemGroup>
+
 </Project>

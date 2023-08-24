@@ -19,34 +19,9 @@ namespace BookStoreWebApp.DataAccess.Repository
             _database = database;
         }
 
-        public void Add(CoverType entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(CoverType entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteRange(IEnumerable<CoverType> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<CoverType> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public CoverType GetFirstOrDefault(Expression<Func<CoverType, bool>> filter)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(CoverType coverType)
         {
-            throw new NotImplementedException();
+            _database.CoverType.Update(coverType);
         }
     }
 }

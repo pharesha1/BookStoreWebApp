@@ -16,7 +16,8 @@ namespace BookStoreWebApp.DataAccess.Data
 
         }
 
-        public DbSet<Categories> Categories { get; set; }
+        public DbSet<Category> Category { get; set; }
         public DbSet<CoverType> CoverType { get; set; }
+        public DbSet<Product> Product { get; set; }
     }
 }

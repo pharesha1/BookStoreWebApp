@@ -1,0 +1,21 @@
+﻿@model CoverType
+
+<form method="post" asp-action="Edit">
+    <div>
+        <h2>Edit a Cover Type</h2>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control"/>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary" style="width: 250px">Edit</button>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
