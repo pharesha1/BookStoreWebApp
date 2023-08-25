@@ -1,6 +1,7 @@
 ﻿using BookStoreWebApp.DataAccess.Data;
 using BookStoreWebApp.DataAccess.Repository.IRepository;
 using BookStoreWebApp.Models;
+using BookStoreWebApp.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,62 +12,75 @@ namespace BookStoreWebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductController(IUnitOfWork unitOfWork)
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
         // GET: CategoriesController
         public IActionResult Index()
         {
-            IEnumerable<CoverType> coverTypeList = _unitOfWork.CoverType.GetAll();
-
-            return View(coverTypeList);
+            return View();
         }
 
         // GET: CategoriesController/Edit/5
         public IActionResult Upsert(int? id)
         {
-            Product product = new();
+            ProductVM productVM = new()
+            {
+                Product = new(),
+                CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
 
-            IEnumerable<SelectListItem> categoryList = _unitOfWork.Category.GetAll().Select(
-                u => new SelectListItem
+                CoverTypeList = _unitOfWork.CoverType.GetAll().Select(i => new SelectListItem
                 {
-                    Text = u.Name,
-                    Value = u.Id.ToString()
-                });
-            IEnumerable<SelectListItem> coverTypeList = _unitOfWork.CoverType.GetAll().Select(
-                u => new SelectListItem
-                {
-                    Text = u.Name,
-                    Value = u.Id.ToString()
-                });
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
+            };
 
             if (id == null || id == 0)
             {
-                ViewBag.CategoryList = categoryList;
-                ViewBag.CoverTypeList = coverTypeList;
 
-                return View(product);
+                return View(productVM);
             }
             else
             {
 
             }
 
-            return View(product);
+            return View(productVM);
         }
 
         // POST: CategoriesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(CoverType obj)
+        public IActionResult Upsert(ProductVM obj, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.CoverType.Update(obj);
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString();
+                    var uploads = Path.Combine(wwwRootPath, @"images\products");
+                    var extension = Path.GetExtension(file.FileName);
+
+                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                    {
+                        file.CopyTo(fileStreams);
+                    }
+                    obj.Product.ImageURL = @"\images\products\" + fileName + extension;
+                }
+
+                _unitOfWork.Product.Add(obj.Product);
                 _unitOfWork.Save();
-                TempData["success"] = "Cover Type Edited Successfuly";
+                TempData["success"] = "Product Created Successfuly";
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -112,5 +126,16 @@ namespace BookStoreWebApp.Areas.Admin.Controllers
             TempData["success"] = "Cover Type Deleted Successfuly";
             return RedirectToAction("Index");
         }
+
+        #region API CALLS
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var productList = _unitOfWork.Product.GetAll(includeProperties: "Category");
+            return Json(new { data = productList });
+        }
+
+        #endregion
     }
 }

@@ -36,17 +36,32 @@ namespace BookStoreWebApp.DataAccess.Repository
             databaseSet.RemoveRange(entities);
         }
 
-        IEnumerable<T> IRepository<T>.GetAll()
+        IEnumerable<T> IRepository<T>.GetAll(string? includeProperties = null)
         {
             IQueryable<T> query = databaseSet;
+            if(includeProperties != null)
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ','}, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
             return query.ToList();
         }
 
-        T IRepository<T>.GetFirstOrDefault(Expression<Func<T, bool>> filter)
+        T IRepository<T>.GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = databaseSet;
 
             query = query.Where(filter);
+
+            if (includeProperties != null)
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
 
             return query.FirstOrDefault();
         }
