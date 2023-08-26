@@ -22,16 +22,21 @@ namespace BookStoreWebApp.Models
         public string? Author { get; set; }
         [Required]
         [Range(1,10000)]
+        [DisplayName("List Price")]
         public int ListPrice { get; set; }
         [Range(1,10000)]
+        [DisplayName("Price for 1-49")]
         public int Price { get; set; }
         [Required]
         [Range(1,10000)]
+        [DisplayName("Price for 50-99")]
         public int Price50 { get; set; }
         [Required]
         [Range(1,10000)]
+        [DisplayName("Price for 100+")]
         public int Price100 { get; set; }
         [ValidateNever]
+        [DisplayName("Image")]
         public string? ImageURL { get; set;}
         [Required]
         [DisplayName("Category")]

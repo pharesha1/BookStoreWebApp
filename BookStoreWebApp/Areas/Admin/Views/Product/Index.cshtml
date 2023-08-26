@@ -1,8 +1,7 @@
 ﻿<div>
-    <div>
-        <div class="row-1">
-            <h2 class="text-primary row-1">Products</h2>
-            <a class="btn btn-primary float-end row-1" asp-controller="Product" asp-action="Upsert">Create new Product</a>
+        <div>
+            <h2 class="text-primary mb-0">Products</h2>
+        <a class="btn btn-primary float-end mb-2" asp-controller="Product" asp-action="Upsert">Create new Product</a>
         </div>
         @if (TempData["success"] != null)
         {
@@ -23,7 +22,6 @@
             </thead>
         </table>
     </div>
-</div>
 
 @section Scripts{
     <script src="~/js/product.js"></script>
