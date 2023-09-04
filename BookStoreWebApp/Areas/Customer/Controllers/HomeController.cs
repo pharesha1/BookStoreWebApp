@@ -1,4 +1,6 @@
-﻿using BookStoreWebApp.Models;
+﻿using BookStoreWebApp.DataAccess.Repository.IRepository;
+using BookStoreWebApp.Models;
+using BookStoreWebApp.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,14 +10,28 @@ namespace BookStoreWebApp.Areas.Customer.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category,CoverType");
+
+            return View(productList);
+        }
+        public IActionResult Details(int id)
+        {
+            ShoppingCart shoppingCart = new()
+            {
+                Count = 1,
+                Product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id, includeProperties: "Category,CoverType")
+            };
+            return View(shoppingCart);
         }
 
         public IActionResult Privacy()

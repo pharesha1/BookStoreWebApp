@@ -46,7 +46,7 @@ function Delete(url) {
                 type: 'DELETE',
                 success: function (data) {
                     if (data.success) {
-                        datatable.ajax.reload;
+                        datatable.ajax.reload();
                         Swal.fire(
                             'Deleted!',
                             'Your file has been deleted.',
