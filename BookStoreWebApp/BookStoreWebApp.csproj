@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookStoreWebApp.DataAccess\BookStoreWebApp.DataAccess.csproj" />
+    <ProjectReference Include="..\BookStoreWebApp.Utility\BookStoreWebApp.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>
