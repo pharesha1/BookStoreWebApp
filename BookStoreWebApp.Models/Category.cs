@@ -13,7 +13,7 @@ namespace BookStoreWebApp.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public string? Name { get; set; }
+        public string Name { get; set; }
         [DisplayName("Display Order")]
         [Range(0,250,ErrorMessage="Choose a number between 1 and 250")]
         public int DisplayOrder { get; set; }

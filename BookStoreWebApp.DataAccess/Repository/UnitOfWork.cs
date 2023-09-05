@@ -18,12 +18,15 @@ namespace BookStoreWebApp.DataAccess.Repository
             Category = new CategoryRepository(_database);
             CoverType = new CoverTypeRepository(_database);
             Product = new ProductRepository(_database);
+            Company = new CompanyRepository(_database);
         }
         public ICategoryRepository Category { get; private set; }
 
         public ICoverTypeRepository CoverType { get; private set; }
 
         public IProductRepository Product { get; private set; }
+
+        public ICompanyRepository Company { get; private set; }
 
         void IUnitOfWork.Save()
         {
