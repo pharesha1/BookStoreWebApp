@@ -1,4 +1,5 @@
 ﻿using BookStoreWebApp.Models;
+using BookStoreWebApp.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -23,5 +24,6 @@ namespace BookStoreWebApp.DataAccess.Data
         public DbSet<Product> Product { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Company> Company { get; set; }
+        public DbSet<ShoppingCart> ShoppingCart { get; set; }
     }
 }

@@ -19,6 +19,8 @@ namespace BookStoreWebApp.DataAccess.Repository
             CoverType = new CoverTypeRepository(_database);
             Product = new ProductRepository(_database);
             Company = new CompanyRepository(_database);
+            ApplicationUser = new ApplicationUserRepository(_database);
+            ShoppingCart = new ShoppingCartRepository(_database);
         }
         public ICategoryRepository Category { get; private set; }
 
@@ -27,6 +29,8 @@ namespace BookStoreWebApp.DataAccess.Repository
         public IProductRepository Product { get; private set; }
 
         public ICompanyRepository Company { get; private set; }
+        public IShoppingCartRepository ShoppingCart { get; private set; }
+        public IApplicationUserRepository ApplicationUser { get; private set; }
 
         void IUnitOfWork.Save()
         {
