@@ -1,0 +1,106 @@
+﻿
+<div>
+    <form method="post">
+        <div class="card container p-0">
+            <div class="card-header bg-dark row d-flex align-items-center m-0 p-0">
+                <div class="col-12 col-md-6 text-white p-4">
+                    <h2>Order Summary</h2>
+                </div>
+                <div class="col-12 col-md-6 text-end pe-4">
+                    <a class="btn btn-secondary" asp-area="Customer" asp-controller="Cart" asp-action="Index">Back To Shopping</a>
+                </div>
+            </div>
+            <div class="card-body row container">
+                <div class="container rounded">
+                     <div class="row">
+                            <div class="col-8 col-md-6">
+                                <div class="row my-1">
+                                    <h4>Shipment Details:</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="row my-1">
+                                        <div class="col-3">
+                                            <label>Name</label>
+                                        </div>
+                                        <div class="col-9 p-0">
+                                            <input class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-3">
+                                            <label>Phone</label>
+                                        </div>
+                                        <div class="col-9 p-0">
+                                            <input class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-3">
+                                            <label>Street Address</label>
+                                        </div>
+                                        <div class="col-9 p-0">
+                                            <input class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-3">
+                                            <label>State</label>
+                                        </div>
+                                        <div class="col-9 p-0">
+                                            <input class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-3">
+                                            <label>City</label>
+                                        </div>
+                                        <div class="col-9 p-0">
+                                            <input class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-3">
+                                            <label>Postal Code</label>
+                                        </div>
+                                        <div class="col-9 p-0">
+                                            <input class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 offset-md-2 my-1">
+                                <div class="row">
+                                    <div class="row mb-1">
+                                        <h4>Order Summary:</h4>
+                                    </div>
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between bg-light text-dark">
+                                            <div>
+                                                <h6 class="my-0">Title</h6>
+                                                <small class="text-muted">Quantity x Count</small>
+                                            </div>
+                                            <span class="text-muted">$$$</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between bg-light text-dark">
+                                            <span class="text-info">Total (USD)</span>
+                                            <strong class="text-info">$$$</strong>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <h6 class="align-middle">Estimated Arrival Date:</h6>
+                    </div>
+                    <div class="col-md-6 pb-1 offset-md-2">
+                        <button class="btn btn-success form-control" style="height: 50px" value="Add to Cart" type="submit">Place an Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

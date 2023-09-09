@@ -1,63 +1,71 @@
-﻿<div>
+﻿@model BookStoreWebApp.Models.ViewModels.ShoppingCartVM;
+<div>
     <form method="post">
-        <div class="card container">
-            <div class="card-header bg-dark row d-flex align-items-center">
-                <div class="col-12 col-md-6 text-white">
+        <div class="card container p-0">
+            <div class="card-header bg-dark row d-flex align-items-center m-0 m-0">
+                <div class="col-12 col-md-6 text-white p-4">
                     <h2>Shopping Cart</h2>
                 </div>
-                <div class="col-12 col-md-6 text-end">
-                    <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Back To Shopping</a>
+                <div class="col-12 col-md-6 text-end pe-4">
+                    <a class="btn btn-secondary" asp-area="Customer" asp-controller="Home" asp-action="Index">Back To Shopping</a>
                 </div>
             </div>
             <div class="card-body row container">
                 <div class="container rounded">
+                    @foreach(var cart in Model.CartList){
                     <div class="row">
                         <div class="col-8 col-md-6 border-bottom">
                             <div class="row">
-                                <div class="row">
-                                    <img src="" />
-                                    <h4>Title</h4>
-                                    <p>Author</p>
+                                <div class="col-lg-2 d-none d-lg-block text-center py-2">
+                                    <img src="@cart.Product.ImageURL" class="img-fluid" />
+                                </div>
+                                <div class="col-12 col-lg-6 pt-md-3">
+                                    <h4>@cart.Product.Title</h4>
+                                    <p>@cart.Product.Author</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 border-bottom">
                             <div class="row">
                                 <div class="col-3">
-                                    <p style="margin-top: 1rem">Price X Count</p>
+                                        <p style="margin-top: 1rem">@cart.Price.ToString("c") x @cart.Count</p>
                                 </div>
                                 <div class="col-3 d-flex align-items-center">
-                                    <a class="btn btn-dark" style="width: 100%">
+                                    <a class="btn btn-dark" style="width: 100%" asp-action="IncrementCount" asp-route-cartId="@cart.Id">
                                         <i class="bi bi-plus-lg"></i>
                                     </a>
                                 </div>
                                 <div class="col-3 d-flex align-items-center">
-                                    <a class="btn btn-warning" style="width: 100%">
+                                    <a class="btn btn-warning" style="width: 100%" asp-action="DecrementCount" asp-route-cartId="@cart.Id">
                                         <i class="bi bi-dash-lg"></i>
                                     </a>
                                 </div>
                                 <div class="col-3 d-flex align-items-center">
-                                    <a class="btn btn-danger" style="width: 100%">
+                                    <a class="btn btn-danger" style="width: 100%" asp-action="Delete" asp-route-cartId="@cart.Id">
                                         <i class="bi bi-trash3"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 mt-3">
-                            <ul class="list-group">
-                                <li class="list-group-item d-flex justify-content-between bg-light text-dark">
-                                    <span class="text-info">Total (USD)</span>
-                                    <strong class="text-info">$$$</strong>
-                                </li>
-                            </ul>
-                        </div>
+                    </div>
+                    }
+                    <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 mt-3">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between bg-light text-dark">
+                                <span class="text-info">Total (USD)</span>
+                                <strong class="text-info">@Model.CartTotalPrice.ToString("c")</strong>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
                 <div class="row">
                     <div class="col-12 col-md-6 pb-1">
-                        <button class="btn btn-success form-control" style="height: 50px" value="Add to Cart" type="submit">Summary</button>
+                        <button class="btn btn-success form-control" style="height: 50px" value="Add to Cart" type="submit"
+                                asp-area="Customer" asp-controller="Cart" asp-action="Summary">
+                            Summary
+                        </button>
                     </div>
                 </div>
             </div>

@@ -4,9 +4,13 @@
 }
 
 <div>
-    <div>
-        <h2>Categories</h2>
-        <a asp-controller="Category" asp-action="Create">Create new category</a>
+    <div class="row my-2">
+        <div class="col-6">
+            <h2 class="text-primary">Categories</h2>
+        </div>
+        <div class="col-6">
+            <a class="btn btn-primary offset-8" asp-controller="Category" asp-action="Create">Create new Category</a>
+        </div>
         @if(TempData["success"] != null)
         {
             <h2>@TempData["success"]</h2>
@@ -31,7 +35,7 @@
                         <td>@obj.DisplayOrder</td>
                         <td>@obj.CreationDate</td>
                         <td><a asp-controller="Category" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary">Edit</a></td>
-                        <td><a asp-controller="Category" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-secondary">Delete</a></td>
+                        <td><a asp-controller="Category" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger">Delete</a></td>
                     </tr>
                 }
             </tbody>

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStoreWebApp.Models.ViewModels
+namespace BookStoreWebApp.Models
 {
     public class ShoppingCart
     {
@@ -19,11 +19,13 @@ namespace BookStoreWebApp.Models.ViewModels
         [ValidateNever]
         public Product Product { get; set; }
 
-        [Range(0, 1000, ErrorMessage="Cart count should be between 1-1000")]
+        [Range(0, 1000, ErrorMessage = "Cart count should be between 1-1000")]
         public int Count { get; set; }
         public string ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
+        [NotMapped]
+        public double Price { get; set; }
     }
 }

@@ -9,8 +9,8 @@
                     <img src="@product.ImageURL" class="img-fluid p-0" style="max-height: 450px">
                     <div class="ps-2">
                         <h4 class="card-title">@product.Title</h4>
-                        <p>@product.Price</p>
-                        <p>@product.Author</p>
+                        <p>Price: @product.Price.ToString("c")</p>
+                        <p>By: @product.Author</p>
                     </div>
                     <div>
                         <a asp-action="Details" class="btn btn-primary form-control" asp-route-productId="@product.Id">Details</a>
